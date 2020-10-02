@@ -3,6 +3,7 @@
 
 # Ignore Gradle build output directory
 build
+reports
 
 # OS generated files
 .DS_Store
