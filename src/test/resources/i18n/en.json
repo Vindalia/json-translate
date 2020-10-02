@@ -1,0 +1,9 @@
+{
+  "ROOT_LEVEL": "Root level",
+  "FIRST_LEVEL": {
+    "EXAMPLE": "Example on first level",
+    "SECOND_LEVEL": {
+      "EXAMPLE": "Example on second level"
+    }
+  }
+}
