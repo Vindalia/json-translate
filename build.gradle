@@ -1,7 +1,11 @@
 plugins {
     id 'java-library'
     id 'jacoco'
+    id 'maven-publish'
 }
+
+group = 'net.vindalia.jsontranslate'
+version = '1.0.0'
 
 repositories {
     jcenter()
@@ -27,5 +31,13 @@ jacocoTestReport {
     reports {
         xml.enabled true
         xml.destination file("${projectDir}/reports/coverage.xml")
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
     }
 }
