@@ -16,6 +16,13 @@ public class JsonTranslate {
         parser.parse(translationDirectory);
     }
 
+    public JsonTranslate(File translationDirectory, boolean debugMode) throws IOException {
+        this.translationStore = new TranslationStore(debugMode);
+
+        JsonParser parser = new JsonParser(this.translationStore);
+        parser.parse(translationDirectory);
+    }
+
     public String translate(String language, String key) {
         return this.translationStore.get(language, key);
     }

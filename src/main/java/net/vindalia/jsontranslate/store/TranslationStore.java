@@ -5,12 +5,22 @@ import java.util.HashMap;
 public class TranslationStore {
 
     private final HashMap<String, HashMap<String, String>> translationMap;
+    private boolean debugMode = false;
 
     public TranslationStore() {
         this.translationMap = new HashMap<>();
     }
 
+    public TranslationStore(boolean debugMode) {
+        this.translationMap = new HashMap<>();
+        this.debugMode = debugMode;
+    }
+
     public String get(String language, String key) {
+        if (!this.translationMap.containsKey(key)) {
+            return this.debugMode ? key : null;
+        }
+
         return this.translationMap.get(key).get(language);
     }
 

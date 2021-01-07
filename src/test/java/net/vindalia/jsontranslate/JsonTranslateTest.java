@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonTranslateTest {
 
@@ -49,11 +47,38 @@ public class JsonTranslateTest {
         assertEquals("Example on second level", translation);
     }
 
+    @Test
+    public void testItGetsNullIfKeyNotExists() {
+        JsonTranslate jsonTranslate = this.get();
+        String translation = jsonTranslate.translate("de", "INVALID_KEY.LEVEL");
+
+        assertNull(translation);
+    }
+
+    @Test
+    public void testItGetsKeyWithDebugModeIfKeyNotExists() {
+        JsonTranslate jsonTranslate = this.getWithDebugMode();
+        String translation = jsonTranslate.translate("de", "INVALID_KEY.LEVEL");
+
+        assertEquals("INVALID_KEY.LEVEL", translation);
+    }
+
     private JsonTranslate get() {
         File translationFile = new File("src/test/resources/i18n");
         JsonTranslate jsonTranslate = null;
         try {
             jsonTranslate = new JsonTranslate(translationFile);
+        } catch (IOException e) {
+            fail("Could not create JsonTranslate", e);
+        }
+        return jsonTranslate;
+    }
+
+    private JsonTranslate getWithDebugMode() {
+        File translationFile = new File("src/test/resources/i18n");
+        JsonTranslate jsonTranslate = null;
+        try {
+            jsonTranslate = new JsonTranslate(translationFile, true);
         } catch (IOException e) {
             fail("Could not create JsonTranslate", e);
         }
